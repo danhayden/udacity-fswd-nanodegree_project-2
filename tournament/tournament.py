@@ -103,9 +103,6 @@ def playerStandings():
     The first entry in the list should be the player in first place, or a
     player tied for first place if there is currently a tie.
 
-    The standings view will return the data ordered first by number of wins,
-    then by number of macthes played to simplify queries.
-
     Returns:
       A list of tuples, each of which contains (id, name, wins, matches):
         id: the player's unique id (assigned by the database)
@@ -113,7 +110,8 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     '''
-    return db_select_all("SELECT * FROM standings;")
+    return db_select_all("SELECT * FROM standings \
+                         ORDER BY wins DESC, matches ASC;")
 
 
 def reportMatch(winner, loser):

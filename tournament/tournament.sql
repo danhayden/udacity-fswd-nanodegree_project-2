@@ -42,9 +42,6 @@ CREATE TABLE match (
 -- Calculate number of wins
 -- Calculate number of matches
 --
--- Ordered data first by number of wins, then by number of macthes played to
--- simplify pairing queries.
---
 
 CREATE VIEW standings AS
 SELECT player_id,
@@ -52,6 +49,4 @@ SELECT player_id,
        (SELECT count(*) FROM match WHERE player_id = winner) AS wins,
        (SELECT count(*) FROM match WHERE player_id IN (winner, loser)) AS matches
 FROM player
-GROUP BY player_id
-ORDER BY wins DESC,
-         matches ASC;
+GROUP BY player_id;
