@@ -22,7 +22,7 @@ def db_execute(statement, params=False):
     '''
     conn = connect()
     cur = conn.cursor()
-    cur.execute(query, params)
+    cur.execute(statement, params)
     conn.commit()
     conn.close()
 
