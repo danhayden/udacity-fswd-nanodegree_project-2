@@ -17,7 +17,7 @@ def db_query(query, params=False):
     Helper function for queries that do not need to return anything
 
     Args:
-      query: the sql query to be excuted
+      query: the sql statement to be excuted
       params: the parameters of the query
     '''
     conn = connect()
@@ -30,6 +30,10 @@ def db_query(query, params=False):
 def db_select_one(query, params=False):
     '''
     Helper function for queries that return one result
+
+    Args:
+      query: the sql statement to be excuted
+      params: the parameters of the query
 
     Returns:
       The first value of the first row returned from the query.
@@ -48,7 +52,7 @@ def db_select_all(query, params=False):
     Helper function for queries that return a set of results
 
     Args:
-      query: the sql query to be excuted
+      query: the sql statement to be excuted
       params: the parameters of the query
 
     Returns:
