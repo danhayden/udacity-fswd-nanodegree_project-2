@@ -12,13 +12,13 @@ def connect():
     return psycopg2.connect("dbname=tournament")
 
 
-def db_query(query, params=False):
+def db_execute(statement, params=False):
     '''
-    Helper function for queries that do not need to return anything
+    Helper function for statements that do not need to return anything
 
     Args:
-      query: the sql statement to be excuted
-      params: the parameters of the query
+      statement: the sql statement to be excuted
+      params: the parameters of the statement
     '''
     conn = connect()
     cur = conn.cursor()
@@ -69,12 +69,12 @@ def db_select_all(query, params=False):
 
 def deleteMatches():
     ''' Remove all the match records from the database. '''
-    db_query("DELETE FROM match;")
+    db_execute("DELETE FROM match;")
 
 
 def deletePlayers():
     ''' Remove all the player records from the database. '''
-    db_query("DELETE FROM player;")
+    db_execute("DELETE FROM player;")
 
 
 def countPlayers():
@@ -93,7 +93,7 @@ def registerPlayer(name):
       name: the player's full name (need not be unique).
     '''
     clean_name = bleach.clean(name)
-    db_query("insert into player (player_name) values (%s);", (clean_name,))
+    db_execute("insert into player (player_name) values (%s);", (clean_name,))
 
 
 def playerStandings():
@@ -122,8 +122,8 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     '''
-    db_query("INSERT INTO match (winner, loser) VALUES (%s, %s)",
-             (winner, loser))
+    db_execute("INSERT INTO match (winner, loser) VALUES (%s, %s)",
+               (winner, loser))
 
 
 def swissPairings():
