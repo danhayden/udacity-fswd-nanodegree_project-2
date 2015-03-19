@@ -42,6 +42,9 @@ CREATE TABLE match (
 -- Calculate number of wins
 -- Calculate number of matches
 --
+-- Ordered data first by number of wins, then by number of macthes played to
+-- simplify pairing queries.
+--
 
 CREATE VIEW standings AS
 SELECT player_id,
